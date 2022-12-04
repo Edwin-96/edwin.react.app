@@ -1,3 +1,22 @@
-h1, p {
+h1,
+p {
   font-family: Lato;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.container {
+  width: 100%;
+  display: inline;
+}
+
+.block {
+  background-color: #55c0a9;
+  width: var(--block-size);
+  height: var(--block-size);
+  margin: 0px;
+  float: left;
 }
