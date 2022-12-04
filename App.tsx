@@ -1,10 +1,20 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import anime from 'animejs/lib/anime.es.js';
+import { useState, useEffect, useRef } from 'react';
 import './style.css';
+import anime from 'animejs';
 
-const amount = 50;
+const amount = 25;
 const percent = 100;
+
+const colors = [
+  '#f57f4f',
+  '#0a80b0',
+  '#008080',
+  '#ffd700',
+  '#0d7373',
+  '#a575c5',
+  '#4febbf',
+];
 
 const calcBlocks = (amount: number, heightPercent: number) => {
   let size = window.innerWidth / amount;
@@ -23,22 +33,10 @@ const setBlocksSize = (size: number) => {
   document.documentElement.style.setProperty('--block-size', `${size}px`);
 };
 
-const stagger = () => {
-  console.log('I was clicked');
-  let blocks = calcBlocks(amount, percent);
-  anime({
-    target: '.block',
-    backgroundColor: 'red',
-    delay: anime.stagger(blocks.size, {
-      grid: [blocks.amountWidth, blocks.amountHeight],
-    }),
-  });
-};
-
-const generateBlocks = (amount: number) => {
+const generateBlocks = (amount: number, click: (index: number) => void) => {
   let blocks: any[] = [];
   for (let i = 0; i < amount; i++)
-    blocks.push(<div key={i} onClick={stagger} className="block"></div>);
+    blocks.push(<div key={i} onClick={() => click(i)} className="block"></div>);
   return blocks;
 };
 
@@ -47,10 +45,29 @@ export default function App() {
 
   let blocks = calcBlocks(amount, percent);
 
+  // const animation = useRef(null);
+
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth));
     setBlocksSize(blocks.size);
   });
 
-  return <div className="container">{generateBlocks(blocks.totalAmount)}</div>;
+  const stagger = (index: number) => {
+    let color = colors[Math.trunc(Math.random() * (colors.length - 1))];
+    anime({
+      targets: '.block',
+      autostart: false,
+      backgroundColor: color,
+      delay: anime.stagger(50, {
+        grid: [blocks.amountWidth, blocks.amountHeight],
+        from: index,
+      }),
+    });
+  };
+
+  return (
+    <div className="container">
+      {generateBlocks(blocks.totalAmount, stagger)}
+    </div>
+  );
 }
