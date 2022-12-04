@@ -4,7 +4,7 @@ import './style.css';
 import anime from 'animejs';
 
 const amount = 25;
-const percent = 100;
+const percent = 75;
 
 const colors = [
   '#f57f4f',
@@ -58,9 +58,10 @@ export default function App() {
       targets: '.block',
       autostart: false,
       backgroundColor: color,
-      delay: anime.stagger(50, {
+      delay: anime.stagger(25, {
         grid: [blocks.amountWidth, blocks.amountHeight],
         from: index,
+        // easing: 'steps(10)',
       }),
     });
   };
