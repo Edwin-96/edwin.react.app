@@ -1,13 +1,16 @@
 import * as React from 'react';
+import { useState } from 'react';
 import './css/menu.css';
 
 export default function Menu() {
+  const [visible, setVisible] = useState(false);
+
   return (
     <nav>
       <div className="logo">
-        <h4>EDWIN DEV</h4>
+        <h4>Edwin dev</h4>
       </div>
-      <ul>
+      <ul className={`nav-links ${visible ? 'visible' : ''}`}>
         <li>
           <a href="#">Home</a>
         </li>
@@ -24,6 +27,11 @@ export default function Menu() {
           <a href="#">Projects</a>
         </li>
       </ul>
+      <div className="burger" onClick={() => setVisible(!visible)}>
+        <div className="line1"></div>
+        <div className="line2"></div>
+        <div className="line3"></div>
+      </div>
     </nav>
   );
 }

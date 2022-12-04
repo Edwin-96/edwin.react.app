@@ -2,8 +2,64 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 8vh;
+  min-height: 7vh;
   background-color: var(--general-color);
   /* transition: color 3ms; */
   color: whitesmoke;
+}
+
+.logo {
+  letter-spacing: 8px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2vw;
+  transition: transform 0.3s ease-in;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  color: whitesmoke;
+  text-decoration: none;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.burger {
+  display: none;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: whitesmoke;
+  margin: 5px;
+}
+
+@media screen and (max-width: 720px) {
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    left: 100vw;
+    height: 93vh;
+    top: 7vh;
+    background-color: red;
+    width: 75%;
+  }
+
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-links.visible {
+    transform: translateX(-100%);
+  }
 }
