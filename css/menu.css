@@ -1,0 +1,9 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  background-color: var(--general-color);
+  /* transition: color 3ms; */
+  color: whitesmoke;
+}

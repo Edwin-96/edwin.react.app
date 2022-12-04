@@ -1,11 +1,22 @@
+:root {
+  --general-color: #2a2a2a;
+}
+
 h1,
 p {
   font-family: Lato;
 }
 
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 body {
   padding: 0px;
   margin: 0px;
+  font-family: 'Ubuntu Mono', monospace;
 }
 
 .container {
@@ -14,7 +25,7 @@ body {
 }
 
 .block {
-  background-color: #2a2a2a;
+  background-color: var(--general-color);
   width: var(--block-size);
   height: var(--block-size);
   margin: 0px;

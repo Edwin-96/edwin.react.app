@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import './style.css';
 import anime from 'animejs';
 
+import Menu from './menu';
+
 const amount = 25;
 const percent = 75;
 
@@ -33,6 +35,10 @@ const setBlocksSize = (size: number) => {
   document.documentElement.style.setProperty('--block-size', `${size}px`);
 };
 
+const setColor = (color: string) => {
+  document.documentElement.style.setProperty('--general-color', color);
+};
+
 const generateBlocks = (amount: number, click: (index: number) => void) => {
   let blocks: any[] = [];
   for (let i = 0; i < amount; i++)
@@ -54,6 +60,7 @@ export default function App() {
 
   const stagger = (index: number) => {
     let color = colors[Math.trunc(Math.random() * (colors.length - 1))];
+    // setColor(color);
     anime({
       targets: '.block',
       autostart: false,
@@ -66,9 +73,10 @@ export default function App() {
     });
   };
 
-  return (
+  return [
+    <Menu />,
     <div className="container">
       {generateBlocks(blocks.totalAmount, stagger)}
-    </div>
-  );
+    </div>,
+  ];
 }
