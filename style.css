@@ -26,10 +26,9 @@ body {
 }
 
 .block {
-  background-color: var(--general-color);
+  background-color: var(--color-0);
   width: var(--block-size);
   height: var(--block-size);
   margin: 0px;
   float: left;
 }
-

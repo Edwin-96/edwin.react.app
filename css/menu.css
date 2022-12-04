@@ -34,7 +34,7 @@ nav {
   width: 100%;
   right: 100%;
   bottom: 0;
-  background-color: whitesmoke;
+  background-color: var(--color-0);
   z-index: 1;
   transition: transform 0.3s ease-in;
 }

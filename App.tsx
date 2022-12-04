@@ -35,8 +35,8 @@ const setBlocksSize = (size: number) => {
   document.documentElement.style.setProperty('--block-size', `${size}px`);
 };
 
-const setColor = (color: string) => {
-  document.documentElement.style.setProperty('--general-color', color);
+const setGlobalColor = (color: string) => {
+  document.documentElement.style.setProperty('--color-0', color);
 };
 
 const generateBlocks = (amount: number, click: (index: number) => void) => {
@@ -46,31 +46,33 @@ const generateBlocks = (amount: number, click: (index: number) => void) => {
   return blocks;
 };
 
+const getColor = () => colors[Math.trunc(Math.random() * (colors.length - 1))];
+
 export default function App() {
   const [, setWidth] = useState(0);
+  const [color, setColor] = useState(getColor());
 
   let blocks = calcBlocks(amount, percent);
-
-  // const animation = useRef(null);
 
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth));
     setBlocksSize(blocks.size);
+    setGlobalColor(color);
   });
 
   const stagger = (index: number) => {
-    let color = colors[Math.trunc(Math.random() * (colors.length - 1))];
-    // setColor(color);
+    let newColor = getColor();
     anime({
       targets: '.block',
       autostart: false,
-      backgroundColor: color,
+      backgroundColor: newColor,
       delay: anime.stagger(25, {
         grid: [blocks.amountWidth, blocks.amountHeight],
         from: index,
         // easing: 'steps(10)',
       }),
     });
+    setColor(newColor);
   };
 
   return [

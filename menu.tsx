@@ -2,6 +2,14 @@ import * as React from 'react';
 import { useState } from 'react';
 import './css/menu.css';
 
+const links = [
+  { title: 'Home', href: '#' },
+  { title: 'About', href: '#' },
+  { title: 'Course', href: '#' },
+  { title: 'Showcase', href: '#' },
+  { title: 'Profile', href: '#' },
+];
+
 export default function Menu() {
   const [visible, setVisible] = useState(false);
 
@@ -11,21 +19,11 @@ export default function Menu() {
         <h4>Edwin dev</h4>
       </div>
       <ul className={`nav-links ${visible ? 'visible' : ''}`}>
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">knowledge</a>
-        </li>
-        <li>
-          <a href="#">Other</a>
-        </li>
-        <li>
-          <a href="#">Projects</a>
-        </li>
+        {links.map((link, index) => (
+          <li key={index}>
+            <a href={link.href}>{link.title}</a>
+          </li>
+        ))}
       </ul>
       <div
         className={`burger ${visible ? 'visible' : ''}`}
