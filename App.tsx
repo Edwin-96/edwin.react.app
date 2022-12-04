@@ -1,23 +1,39 @@
 import * as React from 'react';
-import { useState, useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { useState, useEffect } from 'react';
+import anime from 'animejs/lib/anime.es.js';
 import './style.css';
+
+const amount = 50;
+const percent = 100;
 
 const calcBlocks = (amount: number, heightPercent: number) => {
   let size = window.innerWidth / amount;
-  console.log(window.innerHeight, size);
   let amountHeight = Math.trunc(
     (window.innerHeight * (heightPercent / 100)) / size
   );
-  console.log(amount * amountHeight);
-  return amount * amountHeight;
+  return {
+    size,
+    amountHeight,
+    totalAmount: amount * amountHeight,
+    amountWidth: amount,
+  };
 };
 
 const setBlocksSize = (size: number) => {
   document.documentElement.style.setProperty('--block-size', `${size}px`);
 };
 
-const stagger = () => {};
+const stagger = () => {
+  console.log('I was clicked');
+  let blocks = calcBlocks(amount, percent);
+  anime({
+    target: '.block',
+    backgroundColor: 'red',
+    delay: anime.stagger(blocks.size, {
+      grid: [blocks.amountWidth, blocks.amountHeight],
+    }),
+  });
+};
 
 const generateBlocks = (amount: number) => {
   let blocks: any[] = [];
@@ -28,14 +44,13 @@ const generateBlocks = (amount: number) => {
 
 export default function App() {
   const [, setWidth] = useState(0);
-  const amount = 50;
+
+  let blocks = calcBlocks(amount, percent);
 
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth));
-    setBlocksSize(window.innerWidth / amount);
+    setBlocksSize(blocks.size);
   });
 
-  return (
-    <div className="container">{generateBlocks(calcBlocks(amount, 100))}</div>
-  );
+  return <div className="container">{generateBlocks(blocks.totalAmount)}</div>;
 }
