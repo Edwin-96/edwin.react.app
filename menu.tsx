@@ -27,7 +27,10 @@ export default function Menu() {
           <a href="#">Projects</a>
         </li>
       </ul>
-      <div className="burger" onClick={() => setVisible(!visible)}>
+      <div
+        className={`burger ${visible ? 'visible' : ''}`}
+        onClick={() => setVisible(!visible)}
+      >
         <div className="line1"></div>
         <div className="line2"></div>
         <div className="line3"></div>
